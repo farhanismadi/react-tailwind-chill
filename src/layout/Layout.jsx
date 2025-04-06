@@ -4,9 +4,9 @@ import { Navbar } from "../components/navbar";
 
 export const Layout = () => {
   return (
-    <>
+    <div className=" ">
       <Navbar />
       <Outlet />
-    </>
+    </div>
   );
 };
