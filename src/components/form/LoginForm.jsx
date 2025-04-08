@@ -83,7 +83,7 @@ export const LoginForm = () => {
 
           <button
             type="button"
-            className="h-10 flex justify-center items-center gap-2 border border-[#e7e3fc] rounded-full text-[#e7e3fc] text-sm hover:opacity-80 transition bg-[#e7e3fc48] bg-transparent"
+            className="h-10 flex justify-center items-center gap-2 border border-[#e7e3fc] rounded-full text-[#e7e3fc] text-sm hover:opacity-80 transition bg-transparent"
           >
             <img src={logoGoogle} alt="Google Logo" className="h-5 w-5" />
             <span>Masuk dengan Google</span>
