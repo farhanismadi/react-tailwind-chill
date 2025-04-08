@@ -5,7 +5,7 @@ import bg from "../../assets/images/hero.png";
 export const Hero = () => {
   return (
     <section
-      className="h-[600px] bg-no-repeat bg-cover bg-center flex flex-col justify-center px-8 md:px-16"
+      className="h-[600px] bg-no-repeat bg-cover bg-center flex flex-col justify-center px-8 md:px-16 pt-24"
       style={{ backgroundImage: `url(${bg})` }}
     >
       <div className="flex flex-col gap-4 w-full md:w-1/2">

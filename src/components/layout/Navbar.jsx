@@ -15,6 +15,7 @@ export const Navbar = () => {
           src={logo}
           alt="Logo Chill"
           className="w-[60px] sm:w-[80px] md:w-[100px]"
+          onClick={() => navigate("/")}
         />
         <a
           href="#"
@@ -29,7 +30,7 @@ export const Navbar = () => {
           Film
         </a>
         <a
-          href="#"
+          onClick={() => navigate("/my-list")}
           className="text-[#e7e3fc] no-underline hover:opacity-80 text-sm sm:text-base"
         >
           Daftar Saya
