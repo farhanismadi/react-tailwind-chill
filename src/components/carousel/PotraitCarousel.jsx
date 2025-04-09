@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { CoverFilmPotrait } from "../../components/filmCover/CoverFilmPotrait";
+import { FilmPopup } from "../filmCover/FilmPopUp";
 
-export const PotraitCarousel = ({ title, covers }) => {
+export const PotraitCarousel = ({ title, films }) => {
   const carouselRef = useRef(null);
+  const [selectedFilm, setSelectedFilm] = useState(null);
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -17,16 +19,31 @@ export const PotraitCarousel = ({ title, covers }) => {
     }
   };
 
+  const handleFilmClick = (film) => {
+    setSelectedFilm(film);
+  };
+
+  const handleClosePopup = () => {
+    setSelectedFilm(null);
+  };
+
   return (
     <section className="relative flex flex-col gap-5 p-10 overflow-hidden">
       <h3 className="text-2xl font-semibold">{title}</h3>
 
       <div className="relative">
         {/* Container gambar */}
-        <div ref={carouselRef} className="flex overflow-x-hidden scroll-smooth">
-          {covers.map((src, index) => (
-            <div key={index} className="flex-shrink-0 w-[230px]">
-              <CoverFilmPotrait src={src} alt={`Film ${index + 1}`} />
+        <div
+          ref={carouselRef}
+          className="flex gap-5 overflow-x-hidden scroll-smooth"
+        >
+          {films.map((film, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-[230px] cursor-pointer flex flex-col items-center"
+              onClick={() => handleFilmClick(film)}
+            >
+              <CoverFilmPotrait src={film.cover} alt={`Film ${index + 1}`} />
             </div>
           ))}
         </div>
@@ -46,6 +63,11 @@ export const PotraitCarousel = ({ title, covers }) => {
         >
           <FaChevronRight size={20} />
         </button>
+
+        {/* Popup */}
+        {selectedFilm && (
+          <FilmPopup film={selectedFilm} onClose={handleClosePopup} />
+        )}
       </div>
     </section>
   );

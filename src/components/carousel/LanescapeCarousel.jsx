@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { CoverFilmLandscape } from "../filmCover/CoverFilmLanescape";
+import { FilmPopup } from "../filmCover/FilmPopUp";
 
-export const LandscapeCarousel = ({ title, covers }) => {
+export const LandscapeCarousel = ({ title, films }) => {
   const carouselRef = useRef(null);
+  const [selectedFilm, setSelectedFilm] = useState(null);
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -17,6 +19,14 @@ export const LandscapeCarousel = ({ title, covers }) => {
     }
   };
 
+  const handleFilmClick = (film) => {
+    setSelectedFilm(film);
+  };
+
+  const handleClosePopup = () => {
+    setSelectedFilm(null);
+  };
+
   return (
     <section className="relative flex flex-col gap-5 p-10 overflow-hidden">
       <h3 className="text-2xl font-semibold">{title}</h3>
@@ -27,9 +37,13 @@ export const LandscapeCarousel = ({ title, covers }) => {
           ref={carouselRef}
           className="flex gap-5 overflow-x-hidden scroll-smooth"
         >
-          {covers.map((src, index) => (
-            <div key={index} className="flex-shrink-0 w-[300px]">
-              <CoverFilmLandscape src={src} alt={`Film ${index + 1}`} />
+          {films.map((film, index) => (
+            <div
+              key={index}
+              className="flex-shrink-0 w-[300px] flex flex-col items-center cursor-pointer"
+              onClick={() => handleFilmClick(film)}
+            >
+              <CoverFilmLandscape src={film.cover} alt={`Film ${index + 1}`} />
             </div>
           ))}
         </div>
@@ -49,6 +63,11 @@ export const LandscapeCarousel = ({ title, covers }) => {
         >
           <FaChevronRight size={20} />
         </button>
+
+        {/* Popup */}
+        {selectedFilm && (
+          <FilmPopup film={selectedFilm} onClose={handleClosePopup} />
+        )}
       </div>
     </section>
   );
